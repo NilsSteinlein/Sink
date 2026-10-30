@@ -1,0 +1,12 @@
+name: Sync upstream
+on:
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh repo sync "$GITHUB_REPOSITORY" --branch master
+        env:
+          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
